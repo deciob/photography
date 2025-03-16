@@ -1,0 +1,52 @@
+/* || General */
+
+html {
+  /* background: linear-gradient( */
+  /*   var(--color-background-l), */
+  /*   var(--color-background-d) */
+  /* ); */
+  background: var(--color-background-l);
+}
+
+::marker {
+  color: var(--color-primary);
+}
+
+.header__item {
+  /*padding: var(--space-x-s);*/
+  color: var(--color-link-header);
+  text-decoration: none;
+  /* outline: 2px dotted red; */
+}
+
+/*.header__item:first-child {*/
+/*padding-inline-start: 0;*/
+/*}*/
+
+.header__item--active {
+  text-decoration: underline;
+  text-underline-offset: 25%;
+  text-decoration-thickness: 10%;
+  text-decoration-color: var(--color-link-header-active);
+  color: var(--color-link-header-active);
+}
+
+.icons img {
+  width: var(--space-m);
+  height: var(--space-m);
+}
+
+ul ::marker {
+  font-size: var(--font-size-s);
+  white-space: collapse;
+}
+
+.list-style--visible {
+  list-style: disc;
+  list-style-position: inside;
+  text-decoration: none;
+}
+
+img {
+  object-fit: contain;
+}

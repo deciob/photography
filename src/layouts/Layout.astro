@@ -1,0 +1,48 @@
+---
+// Supports weights 100-900
+import "@fontsource-variable/urbanist";
+import "@fontsource-variable/jost";
+
+import "../css/reset.css";
+import "../css/shared-values.css";
+import "../css/layout.css";
+import "../css/typography.css";
+import "../css/main.css";
+
+import MainHeader from "../components/MainHeader.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  context: Page;
+}
+
+const { context } = Astro.props;
+
+const setCardsClass = () => {
+  if (context === "PHOTOS") {
+    return "cards-content";
+  }
+  if (context === "PHOTO") {
+    return "card-content";
+  }
+  return "";
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Decio's web</title>
+  </head>
+  <body class={setCardsClass()}>
+    <MainHeader context={context} />
+    <slot />
+    <Footer />
+  </body>
+</html>
+
+<style></style>

@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { getImageName } from "../../helpers/helpers.ts";
+
+// interface CameraMetadata {
+//   cameraModel: string;
+//   focalLength: string;
+//   postProcessing: string;
+//   dateTimePostProcessing: string;
+//   dateTimeOriginal: string;
+//   copyright: string;
+//   author: string;
+// }
+//
+// // Typed glob import
+// const cameraMetadataFiles = import.meta.glob<{ default: CameraMetadata }>(
+//   "../../scripts/metadata/*.json",
+// );
+// // Convert glob to array of image sources
+// const cameraMetadata = await Promise.all(
+//   Object.values(cameraMetadataFiles).map(async (resolver) => await resolver()),
+// );
+
+export async function getStaticPaths() {
+  // Typed glob import
+  const images = import.meta.glob<{ default: ImageMetadata }>(
+    "../../assets/photos/medium/*.jpg",
+  );
+
+  // Convert glob to array of image sources
+  const imageSources = await Promise.all(
+    Object.values(images).map(async (resolver) => await resolver()),
+  );
+
+  return imageSources.map((metadata) => {
+    const name = getImageName(metadata.default.src);
+    const paths = {
+      params: { photo: name },
+      props: { image: metadata },
+    };
+    return paths;
+  });
+}
+
+const { photo } = Astro.params;
+const { image } = Astro.props;
+---
+
+<style>
+  h1 {
+    color: red;
+  }
+</style>
+
+<Layout context="PHOTO">
+  <article class="main-block">
+    <Image src={image.default} alt={photo} format="webp" />
+  </article>
+</Layout>

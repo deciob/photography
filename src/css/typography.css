@@ -1,0 +1,103 @@
+/* || Typography */
+
+:root {
+  font-family: "Urbanist Variable", sans-serif;
+}
+
+body {
+  margin-block-start: var(--space-s);
+}
+
+.main-block {
+  margin-inline-start: var(--space-s);
+  margin-inline-end: var(--space-s);
+}
+
+header.main-block {
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+:is(header.main-block, h1, h2) {
+  font-family: "Jost Variable", sans-serif;
+}
+
+:is(h1, h2):first-child {
+  margin-block-start: 0;
+}
+
+h1 {
+  font-size: var(--font-size-l);
+  margin-block-start: var(--space-m);
+  margin-block-end: var(--space-m);
+  letter-spacing: var(--space-letter-l);
+  line-height: var(--s);
+  max-width: 20ch;
+  color: var(--header);
+  text-wrap: balance;
+  /*outline: 2px solid;*/
+}
+
+h2 {
+  font-size: var(--font-size-s);
+  font-weight: var(--weight-heavy);
+  margin-block-start: var(--space-s);
+  margin-block-end: var(--space-x-s);
+  letter-spacing: var(--space-letter-m);
+  color: var(--color-sub-header);
+  text-wrap: balance;
+  /*outline: 2px solid;*/
+}
+
+p {
+  font-size: var(--font-size-s);
+  margin-block-end: var(--space-x-s);
+  letter-spacing: var(--space-letter-s);
+  /* max-width: 70ch; */
+  text-wrap: pretty;
+  color: var(--color-text);
+  /*outline: 2px solid red;*/
+}
+
+p::first-letter {
+  /* font-size: var(--font-size-m); */
+  font-weight: var(--weight-x-heavy);
+  /* color: var(--color-primary); */
+}
+
+/* p::first-line { */
+/*   line-height: var(--s); */
+/* } */
+
+a {
+  font-size: var(--font-size-s);
+  font-weight: var(--weight-heavy);
+  color: var(--color-link);
+  /*outline: 2px solid red;*/
+}
+
+.header__item {
+  color: var(--color-link-header);
+  text-decoration: none;
+  /* outline: 2px dotted red; */
+}
+
+.header__item:focus {
+  outline: none;
+}
+
+.header__item:focus-visible {
+  outline: 2px dashed var(--color-primary);
+}
+
+.header__item--active {
+  text-decoration: underline;
+  text-underline-offset: 25%;
+  text-decoration-thickness: 10%;
+  text-decoration-color: var(--color-link-header-active);
+  color: var(--color-link-header-active);
+}
+
+em {
+  font-style: italic;
+}

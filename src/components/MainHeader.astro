@@ -1,0 +1,21 @@
+---
+interface Props {
+  context: Page;
+}
+
+const { context } = Astro.props;
+
+const setClass = (c: Page) => {
+  console.log(context);
+  const base = "header__item";
+  if (c === context) {
+    return `${base} ${base}--active`;
+  }
+  return base;
+};
+---
+
+<header class="main-block">
+  <a class={setClass("INDEX")} href="/deciosweb/"> Home</a>
+  <a class={setClass("PHOTOS")} href="/deciosweb/photos">Photography</a>
+</header>

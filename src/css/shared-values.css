@@ -1,0 +1,56 @@
+/* || Variables */
+
+:root {
+  /* colors */
+
+  --color-background: lch(92% 1.1 85.61);
+  --color-background-d: lch(80% 1.1 85.61);
+  --color-background-l: lch(94% 1.1 85.61);
+  --color-primary: lch(56 77 44.93);
+  --color-secondary: lch(42 33 213.52);
+
+  --color-link: var(--color-secondary);
+  --color-link-header: var(--color-link);
+  --color-link-header-active: var(--color-primary);
+
+  --color-header: #000;
+  --color-sub-header: #222;
+  --color-text: #333;
+
+  /* Golden ration values */
+
+  --xx-s: 0.381;
+  --x-s: 0.618;
+  --s: 1;
+  --m: 1.618;
+  --l: 2.617;
+  --x-l: 4.235;
+  --xx-l: 6.853;
+
+  /* Fluid scaling, follows: 
+   min + (max - min) * ((100vw - min-width) / (max-width - min-width)) */
+
+  /*https://fluid.style*/
+  /*x -> x * 1.333*/
+  --space-xxx-s: clamp(0.034rem, 0.03rem + 0.018vw, 0.045rem);
+  --space-xx-s: clamp(0.381rem, 0.339rem + 0.21vw, 0.507rem);
+  --space-x-s: clamp(0.618rem, 0.55rem + 0.342vw, 0.823rem);
+  --space-s: clamp(1rem, 0.889rem + 0.555vw, 1.333rem);
+  --space-m: clamp(1.618rem, 1.439rem + 0.897vw, 2.156rem);
+  --space-l: clamp(2.617rem, 2.327rem + 1.452vw, 3.488rem);
+  --space-x-l: clamp(4.235rem, 3.765rem + 2.35vw, 5.645rem);
+  --space-xx-l: clamp(6.853rem, 6.092rem + 3.803vw, 9.135rem);
+
+  --font-size-s: var(--space-s);
+  --font-size-m: var(--space-m);
+  --font-size-l: var(--space-l);
+
+  --space-letter-s: 0.03em;
+  --space-letter-m: normal;
+  --space-letter-l: -0.03em;
+
+  /* Bold? */
+
+  --weight-heavy: 600;
+  --weight-x-heavy: 900;
+}

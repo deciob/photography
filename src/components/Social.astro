@@ -1,0 +1,7 @@
+---
+const { hostname, pathname, icon } = Astro.props;
+---
+
+<a rel="me" href=`https://${hostname}/${pathname}`>
+  <img src=`/${icon}` alt=`${hostname}` /></a
+>

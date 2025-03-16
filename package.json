@@ -1,0 +1,23 @@
+{
+  "name": "astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.2.3"
+  },
+  "devDependencies": {
+    "@fontsource-variable/jost": "^5.1.2",
+    "@fontsource-variable/urbanist": "^5.1.1",
+    "gm": "^1.25.0",
+    "images": "^2.1.8",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-jinja-template": "^2.0.0"
+  }
+}

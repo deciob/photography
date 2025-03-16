@@ -1,0 +1,38 @@
+---
+import { getImageName } from "../helpers/helpers";
+import Layout from "../layouts/Layout.astro";
+import { Image } from 'astro:assets';
+
+// interface ImageMetadata {
+//   src: string;
+//   width: number;
+//   height: number;
+//   format: string;
+//   orientation: number;
+// }
+
+// Typed glob import
+const images = import.meta.glob<{ default: ImageMetadata }>("../assets/photos/thumbnails/*.jpg");
+
+// Convert glob to array of image sources
+const imageSources = await Promise.all(
+  Object.values(images).map(async (resolver) => await resolver())
+);
+
+
+---
+
+<Layout context="PHOTOS">
+  <article class="main-block">
+      {imageSources.map((image) => (
+      <a href=`photos/${getImageName(image.default.src).replace("thumbnail", "medium")}`>
+        <Image 
+          src={image.default} 
+          alt={`Image from directory`} 
+          format="webp"
+        />
+        </a>
+      ))}
+  </article>
+</Layout>
+
