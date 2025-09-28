@@ -22,3 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Ignore optimized gallery images
+public/gallery/
+
+# Optional: keep structure but ignore contents
+!public/gallery/.gitkeep
+!public/gallery/thumbs/.gitkeep
+!public/gallery/detail/.gitkeep

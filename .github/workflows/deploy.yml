@@ -1,14 +1,15 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Trigger the workflow every time you push to the `main` branch
-  # Using a different branch name? Replace `main` with your branch’s name
+  # Deploy on push to main (without images for quick code updates)
   push:
     branches: [main]
-  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  # Deploy on release (with images)
+  release:
+    types: [published]
+  # Manual trigger
   workflow_dispatch:
 
-# Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
   pages: write
@@ -20,14 +21,45 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
+
+      - name: Download gallery images (if release triggered)
+        if: github.event_name == 'release'
+        run: |
+          echo "Release triggered deployment - downloading images"
+          gh release download ${{ github.event.release.tag_name }} \
+            --pattern "images.zip" --dir ./temp
+
+          # Extract images to public folder
+          unzip -q ./temp/images.zip -d ./public/
+          echo "Images from release ${{ github.event.release.tag_name }} extracted"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download latest gallery images (if push/manual trigger)
+        if: github.event_name != 'release'
+        run: |
+          # Get the latest release with images
+          LATEST_RELEASE=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
+
+          if [ "$LATEST_RELEASE" != "null" ] && [ -n "$LATEST_RELEASE" ]; then
+            echo "Getting images from latest release: $LATEST_RELEASE"
+            
+            # Check if release has images.zip
+            if gh release view $LATEST_RELEASE --json assets --jq '.assets[].name' | grep -q "images.zip"; then
+              gh release download $LATEST_RELEASE --pattern "images.zip" --dir ./temp
+              unzip -q ./temp/images.zip -d ./public/
+              echo "Images from $LATEST_RELEASE extracted"
+            else
+              echo "No images found in latest release"
+            fi
+          else
+            echo "No releases found - proceeding without gallery images"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Install, build, and upload your site
         uses: withastro/action@v3
-        # with:
-        # path: . # The root location of your Astro project inside the repository. (optional)
-        # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
-        # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
-        # env:
-        # PUBLIC_POKEAPI: 'https://pokeapi.co/api/v2' # Use single quotation marks for the variable value. (optional)
 
   deploy:
     needs: build
