@@ -47,7 +47,7 @@ jobs:
             # Check if release has images.zip
             if gh release view $LATEST_RELEASE --json assets --jq '.assets[].name' | grep -q "images.zip"; then
               gh release download $LATEST_RELEASE --pattern "images.zip" --dir ./temp
-              unzip -q ./temp/images.zip -d ./public/
+              unzip -q ./temp/images.zip -d ./public/gallery/
               echo "Images from $LATEST_RELEASE extracted"
             else
               echo "No images found in latest release"

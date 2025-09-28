@@ -1,7 +1,35 @@
 ---
 import PostLayout from "../../layouts/PostLayout.astro";
+const base = "/photography";
+
+// Gallery.astro
+const images = [
+  {
+    id: "cambridge-punting",
+    title: "Cambridge punting",
+    // Thumbnails for gallery grid
+    thumb: `${base}/gallery/images/DSC_7666.webp`,
+    // Detail view sizes
+    detail: {
+      small: `${base}/gallery/images/DSC_7666.webp`,
+      medium: `${base}/gallery/images/DSC_7666.webp`,
+      large: `${base}/gallery/images/DSC_7666.webp`,
+      xl: `${base}/gallery/images/DSC_7666.webp`,
+    },
+  },
+  // ... more images
+];
 ---
 
 <PostLayout title="Portfolio">
   <h1>Portfolio</h1>
+  <div class="gallery-grid">
+    {
+      images.map((image) => (
+        <div class="gallery-item">
+          <img src={image.thumb} alt={image.title} loading="lazy" />
+        </div>
+      ))
+    }
+  </div>
 </PostLayout>
