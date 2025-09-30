@@ -1,33 +1,28 @@
 ---
 import PostLayout from "../../layouts/PostLayout.astro";
-const base = "/photography";
+
 
 // Gallery.astro
-const images = [
-  {
-    id: "cambridge-punting",
-    title: "Cambridge punting",
-    // Thumbnails for gallery grid
-    thumb: `${base}/gallery/images/DSC_7666.webp`,
-    // Detail view sizes
-    detail: {
-      small: `${base}/gallery/images/DSC_7666.webp`,
-      medium: `${base}/gallery/images/DSC_7666.webp`,
-      large: `${base}/gallery/images/DSC_7666.webp`,
-      xl: `${base}/gallery/images/DSC_7666.webp`,
-    },
-  },
-  // ... more images
-];
+import { getCollection } from "astro:content";
+
+import { getImageUrl } from "../../lib/gallery-helpers.ts";
+
+// Get all gallery items
+const galleryItems = await getCollection("gallery");
 ---
 
 <PostLayout title="Portfolio">
   <h1>Portfolio</h1>
   <div class="gallery-grid">
     {
-      images.map((image) => (
+      galleryItems.map((item) => (
         <div class="gallery-item">
-          <img src={image.thumb} alt={image.title} loading="lazy" />
+      <!-- The HTML below indicates that the thumbnails-small image resource, contained within the src attribute should be used for 1x displays, and that a thumbnails-large version (contained within the srcset, and assigned a 2x descriptor) should be used for 2x displays. -->
+            <img
+              src={getImageUrl(item.data.filename, "thumbnails-small", import.meta.env.BASE_URL)}
+              alt={item.data.alt}
+              srcset=`${getImageUrl(item.data.filename, "thumbnails-large", import.meta.env.BASE_URL)} 2x`
+            />
         </div>
       ))
     }

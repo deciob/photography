@@ -6,6 +6,6 @@ import PostLayout from "../../layouts/PostLayout.astro";
   <h1>Blog</h1>
   <h2>Posts:</h2>
   <ul>
-    <li><a href="/blog/post-1/">Post 1</a></li>
+    <li><a href=`${import.meta.env.BASE_URL}/blog/post-1/`>Post 1</a></li>
   </ul>
 </PostLayout>
