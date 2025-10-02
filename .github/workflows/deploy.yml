@@ -30,7 +30,7 @@ jobs:
             --pattern "images.zip" --dir ./temp
 
           # Extract images to public folder
-          unzip -q ./temp/images.zip -d ./public/
+          unzip -q ./temp/images.zip -d ./public/gallery/
           echo "Images from release ${{ github.event.release.tag_name }} extracted"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
