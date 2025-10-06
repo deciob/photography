@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  background-color: darkgray;
+}
+
+body {
+  display: grid;
+  grid-template-rows: 3rem 1fr 2rem;
+}

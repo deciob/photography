@@ -1,5 +1,5 @@
 ---
-import PostLayout from "../../layouts/PostLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 
 // Gallery.astro
@@ -11,7 +11,7 @@ import { getImageUrl } from "../../lib/gallery-helpers.ts";
 const galleryItems = await getCollection("gallery");
 ---
 
-<PostLayout title="Portfolio">
+<BaseLayout title="Portfolio">
   <h1>Portfolio</h1>
   <div class="gallery-grid">
     {
@@ -27,4 +27,4 @@ const galleryItems = await getCollection("gallery");
       ))
     }
   </div>
-</PostLayout>
+</BaseLayout>
